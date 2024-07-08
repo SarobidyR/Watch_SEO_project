@@ -139,8 +139,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                        
+                        <a href="./index.php"><i class="fa fa-home"></i> Home</a>    
                     </div>
                 </div>
             </div>
@@ -157,7 +156,7 @@
                         
                         <div class="product__details__slider__content">
                             <div class="product__details__pic__slider owl-carousel">
-                                <img data-hash="product-1" class="product__big__img" src="img/product/details/Watch1.jpg" alt="">
+                                <img data-hash="product-1" class="product__big__img" src="<?php echo $details['images'];?>" alt="">
                             </div>
                         </div>
                     </div>
@@ -165,14 +164,7 @@
                 <div class="col-lg-6">
                     <div class="product__details__text">
                         <h3><?php echo $details['produit'];?> <span>Categorie : <?php echo $categorie_name;?></span></h3>
-                        <!-- <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <span>( 138 reviews )</span>
-                        </div> -->
+
                         <div class="product__details__price">$ <?php echo $details['prix'];?> </div>
                         <p><?php echo $details['descriptions'];?></p>
                         <div class="product__details__button">
