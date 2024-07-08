@@ -151,6 +151,7 @@
                             <i class="fa fa-star"></i>
                         </div>
                         <div class="product__price">$ 59.0</div>
+                        <div style="height: 20px;"></div>
                         <button type="submit" class="site-btn"><span class="icon_bag_alt"></span> Add to cart</button>                
                     </div>
                 </div>
