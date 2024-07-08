@@ -10,6 +10,7 @@
   ExpiresByType application/x-shockwave-flash "access plus 1 month"
   ExpiresByType image/x-icon "access plus 1 year"
   ExpiresDefault "access plus 2 days"
+  
   <FilesMatch "\.(ico|jpg|jpeg|png|gif|js|css|swf)$">
     Header set Cache-Control "max-age=31536000, public"
   </FilesMatch>
@@ -25,5 +26,5 @@
   AddOutputFilterByType DEFLATE application/atom+xml
   AddOutputFilterByType DEFLATE application/json
   AddOutputFilterByType DEFLATE image/svg+xml
-  
+
 </IfModule>
