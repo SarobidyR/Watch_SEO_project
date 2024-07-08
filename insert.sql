@@ -17,4 +17,5 @@ INSERT INTO produit(produit, descriptions, prix, images, id_categories) VALUES (
 INSERT INTO produit(produit, descriptions, prix, images, id_categories) VALUES ('Bering The Star', 'Made of high-quality materials such as stainless steel, gold, platinum, etc., ensuring its durability and excellent quality', 350, 'img/product/Watch11.jpg', 3);
 INSERT INTO produit(produit, descriptions, prix, images, id_categories) VALUES ('Duo-link', 'Made of high-quality materials such as stainless steel, gold, platinum, etc., ensuring its durability and excellent quality', 475, 'img/product/Watch12.jpg', 3);
 
-
+UPDATE produit
+SET descriptions = 'Fabriquée à partir de matériaux de haute qualité tels que l''acier inoxydable, l''or, le platine, etc., garantissant sa durabilité et une qualité exceptionnelle.';

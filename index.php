@@ -1,3 +1,12 @@
+<?php
+
+    require("connexion_mysql.php");
+
+    $sql_produit = "SELECT * FROM produit";
+    $query_produit = mysqli_query($db, $sql_produit);
+    
+?>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -132,30 +141,35 @@
             </div>
         </div>
         <div class="row property__gallery">
-            <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/Watch1.jpg">
-                        <ul class="product__hover">
-                            <li><a href="img/product/Watch1.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Contrasting sunglasses</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+            <?php while($produit = mysqli_fetch_assoc($query_produit)) { ?>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="<?php echo $produit['images'];?>">
+                            <ul class="product__hover">
+                                <li><a href="img/product/Watch1.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
                         </div>
-                        <div class="product__price">$ 59.0</div>
-                        <div style="height: 20px;"></div>
-                        <button type="submit" class="site-btn"><span class="icon_bag_alt"></span> Add to cart</button>                
+                        <div class="product__item__text">
+                            <h6><?php echo $produit['produit'];?></h6>
+                            <!-- <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div> -->
+                            <div class="product__price">$ <?php echo $produit['prix'];?></div>
+                            <div style="height: 20px;"></div>
+                            <form action="product-details.php" method="post">
+                                <input type="hidden" name="id_produit" value="<?php echo $produit['id_produit'];?>">
+                                <button type="submit" class="site-btn"><span class="icon_bag_alt"></span> Add to cart</button>   
+                            </form>             
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?php } ?>
             
         </div>
     </div>

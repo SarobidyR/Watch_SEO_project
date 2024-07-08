@@ -1,3 +1,27 @@
+<?php
+
+    require("connexion_mysql.php");
+
+    if (isset($_POST['id_produit'])) {
+        $id_produit = $_POST['id_produit'];
+        // echo "ID du produit : " . $id_produit;
+        $sql_details = "SELECT * FROM produit WHERE id_produit ='%s'";
+        $sql2_details = sprintf($sql_details, $id_produit);
+        $details_result = mysqli_query($db, $sql2_details);
+        $details = mysqli_fetch_assoc($details_result);
+
+        $id_categorie = $details['id_categories'];
+        $sql_categorie = "SELECT * FROM categories WHERE id_categories ='%s'";
+        $sql2_categorie = sprintf($sql_categorie, $id_categorie);
+        $categorie_result = mysqli_query($db, $sql2_categorie);
+        $categorie = mysqli_fetch_assoc($categorie_result);
+        $categorie_name = $categorie['categories'];
+    } else {
+        echo "id_produit = null";
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -140,18 +164,17 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="product__details__text">
-                        <h3>Essential structured blazer <span>Categorie : Unisexe</span></h3>
-                        <div class="rating">
+                        <h3><?php echo $details['produit'];?> <span>Categorie : <?php echo $categorie_name;?></span></h3>
+                        <!-- <div class="rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
-                            <!-- <span>( 138 reviews )</span> -->
-                        </div>
-                        <div class="product__details__price">$ 75.0 </div>
-                        <p>Nemo enim ipsam voluptatem quia aspernatur aut odit aut loret fugit, sed quia consequuntur
-                        magni lores eos qui ratione voluptatem sequi nesciunt.</p>
+                            <span>( 138 reviews )</span>
+                        </div> -->
+                        <div class="product__details__price">$ <?php echo $details['prix'];?> </div>
+                        <p><?php echo $details['descriptions'];?></p>
                         <div class="product__details__button">
                             <div class="quantity">
                                 <span>Quantité:</span>
