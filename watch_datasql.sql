@@ -34,5 +34,6 @@ create table produit(
     images varchar(255),
     id_categories int(10),
     featured varchar(10) default null,
-    active varchar(10) default null
+    active varchar(10) default null,
+    FOREIGN KEY(id_categories) REFERENCES categories(id_categories)
 );
