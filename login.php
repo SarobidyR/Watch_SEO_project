@@ -1,15 +1,5 @@
 <?php
-session_start();
-if (isset($_POST['submit'])) {
-    $identifiant = $_POST['identifiant'];
-    $mdp = $_POST['mdp'];
-
-    // sql to check si user == identifiant et mdp exist
-    $sql = "Select  * from users where identifiant='$identifiant' AND mdp='$mdp'";
-
-    //exécuter la requête
-    $res = mysqli_query($conn, $sql);
-}
+require("connexion_mysql.php");
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -80,7 +70,7 @@ if (isset($_POST['submit'])) {
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
-            <form action="" method="" class="checkout__form">
+            <form action="logintraitement.php" method="GET" class="checkout__form">
                 <div class="row">
                     <div class="col-lg-12">
                         <h5>Se connecter</h5>
