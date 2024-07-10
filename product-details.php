@@ -2,24 +2,23 @@
 
 require("connexion_mysql.php");
 
-session_start();
-if (!isset($_SESSION['identifiant'])) {
-    header('Location:index.php');
-}
-if (!isset($_SESSION['mdp'])) {
-    header('Location:index.php');
-}
-$identifiant = $_SESSION['identifiant'];
-$mdp = $_SESSION['mdp'];
-$id = $_SESSION['id'];
+if (isset($_POST['id_produit'])) {
+    $id_produit = $_POST['id_produit'];
+    // echo "ID du produit : " . $id_produit;
+    $sql_details = "SELECT * FROM produit WHERE id_produit ='%s'";
+    $sql2_details = sprintf($sql_details, $id_produit);
+    $details_result = mysqli_query($bdd, $sql2_details);
+    $details = mysqli_fetch_assoc($details_result);
 
-$format1 = "SELECT * FROM users WHERE identifiant='%s'";
-$sql1 = sprintf($format1, $identifiant);
-$resultat1 = mysqli_query($bdd, $sql1);
-$donnees1 = mysqli_fetch_assoc($resultat1);
-
-$sql_produit = "SELECT * FROM produit";
-$query_produit = mysqli_query($bdd, $sql_produit);
+    $id_categorie = $details['id_categories'];
+    $sql_categorie = "SELECT * FROM categories WHERE id_categories ='%s'";
+    $sql2_categorie = sprintf($sql_categorie, $id_categorie);
+    $categorie_result = mysqli_query($bdd, $sql2_categorie);
+    $categorie = mysqli_fetch_assoc($categorie_result);
+    $categorie_name = $categorie['categories'];
+} else {
+    echo "id_produit = null";
+}
 
 ?>
 
@@ -28,16 +27,15 @@ $query_produit = mysqli_query($bdd, $sql_produit);
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Découvrez la meilleure 
-    sélection de montres de luxe neuves et d'occasion sur Ventura.
-        Nous offrons des marques prestigieuses comme Rolex, Patek Philippe, et Omega,
-        avec des garanties d'authenticité et un service client inégalé.
-        Achetez, vendez ou échangez vos montres de luxe en toute confiance.">
+    <meta name="description" content="Explorez notre collection de montres, 
+    y compris des modèles rares et recherchés. Ventura propose des montres 
+     d'occasion en excellent état avec des certificats d'authenticité et des garanties de qualité.">
+
 
     <meta name="keywords" content="montres de luxe, montres d'occasion, montres de collection, acheter montres de luxe, vendre montres de luxe, Rolex, Patek Philippe, Audemars Piguet, Omega, Cartier, Breitling, montres haut de gamme, montre de luxe homme, montre de luxe femme, investissement montre de luxe, marché montre de luxe, authentification montres de luxe, revendeur montres de luxe, montre d'occasion certifiée, collection de montres, horlogerie de luxe, acheter Rolex d'occasion, vendre montre Rolex, montre de luxe vintage, montre de sport de luxe, montre automatique de luxe, boutique de montres de luxe">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Accueil</title>
+    <title>Détails produits</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
@@ -87,9 +85,12 @@ $query_produit = mysqli_query($bdd, $sql_produit);
 
 </head>
 
-</head>
-
 <body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
     <!-- Offcanvas Menu Begin -->
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">
@@ -118,78 +119,64 @@ $query_produit = mysqli_query($bdd, $sql_produit);
     <?php include("header.php") ?>
     <!-- Header Section End -->
 
-    <!-- Categories Section Begin -->
-
-    <!-- Categories Section End -->
-
-    <!-- Product Section Begin -->
-    <section class="product spad">
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-4">
-                    <div class="section-title">
-                        <h2>Bonjour <?php echo $donnees1['nom']; ?> !</h2>
-                        <h4>New product</h4>
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="./index.php"><i class="fa fa-home"></i> Home</a>
                     </div>
                 </div>
-                <div class="col-lg-8 col-md-8">
-                    <ul class="filter__controls">
-                        <li class="active" data-filter="*">All</li>
-                        <li data-filter=".women">Women’s</li>
-                        <li data-filter=".men">Men’s</li>
-                        <li data-filter=".men">Unisex</li>
-                    </ul>
-                </div>
             </div>
-            <div class="row property__gallery">
-                <?php while ($produit = mysqli_fetch_assoc($query_produit)) { ?>
-                    <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="<?php echo $produit['images']; ?>">
-                                <ul class="product__hover">
-                                    <li><a href="<?php echo $produit['images']; ?>" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                    <!-- <li><a href="#"><span class="icon_heart_alt"></span></a></li> -->
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
 
-                                    <!-- ito DETAILS -->
-                                    <form action="product-details.php" method="post">
+    <!-- Product Details Section Begin -->
+    <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="product__details__pic">
 
-                                        <li><a href="#"><span class="icon_bag_alt" type="submit" name="id_produit" value="<?php echo $produit['id_produit']; ?>"></span></a></li>
-                                        <!-- <li><a href="#"><span class="icon_bag_alt"></span></a></li> -->
-                                        <!-- <button type="submit" class="btn-xs"><span class="icon_bag_alt"></span>Détails</button> -->
-                                    </form>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><?php echo $produit['produit']; ?></h6>
-                                <div class="product__price">$ <?php echo $produit['prix']; ?></div>
-                                <div style="height: 20px;"></div>
-
-                                <!-- ito eee, ça c'est ADD CART -->
-                                <form action="product-details.php" method="post">
-                                    <input type="hidden" name="id_produit" value="<?php echo $produit['id_produit']; ?>">
-                                    <button type="submit" class="site-btn"><span class="icon_bag_alt"></span> Add to cart</button>
-                                </form>
+                        <div class="product__details__slider__content">
+                            <div class="product__details__pic__slider owl-carousel">
+                                <img data-hash="product-1" class="product__big__img" src="<?php echo $details['images']; ?>" alt="">
                             </div>
                         </div>
                     </div>
-                <?php } ?>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product__details__text">
+                        <h3><?php echo $details['produit']; ?> <span>Categorie : <?php echo $categorie_name; ?></span></h3>
+
+                        <div class="product__details__price">$ <?php echo $details['prix']; ?> </div>
+                        <p><?php echo $details['descriptions']; ?></p>
+                        <div class="product__details__button">
+                            <div class="quantity">
+                                <span>Quantité:</span>
+                                <div class="pro-qty">
+                                    <input type="text" value="1">
+                                </div>
+                            </div>
+                            <a href="#" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
+
+                        </div>
+
+                    </div>
+                </div>
 
             </div>
+
+
+
         </div>
     </section>
-    <!-- Product Section End -->
-
-    <!-- Banner Section Begin -->
-
-    <!-- Trend Section End -->
-
-    <!-- Discount Section Begin -->
-
-    <!-- Services Section End -->
+    <!-- Product Details Section End -->
 
     <!-- Instagram Begin -->
-
     <!-- Instagram End -->
 
     <!-- Footer Section Begin -->
-    <?php include("footer.php") ?>
+    <?php include 'footer.php'; ?>
