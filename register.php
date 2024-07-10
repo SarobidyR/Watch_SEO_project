@@ -15,8 +15,7 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -29,24 +28,36 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
 
     <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXXX-X"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-XXXXXXXXX-X');
-</script>
-<!-- End Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXXX-X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-<!-- Google Tag Manager -->
-<script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-XXXXXXX');
-  </script>
-  <!-- End Google Tag Manager -->
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-XXXXXXXXX-X');
+    </script>
+    <!-- End Google Analytics -->
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function(w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-XXXXXXX');
+    </script>
+    <!-- End Google Tag Manager -->
 
 </head>
 
@@ -85,63 +96,9 @@
                         </div>
                         <p>Avez-vous un compte ? <br /><a href="http://">Connectez-vous ici!</a></p>
                     </div>
-                </form>
-            </div>
-        </section>
-        <!-- Checkout Section End -->
-
-        <!-- Footer Section Begin -->
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-7">
-                        <div class="footer__about">
-                            <div class="footer__logo">
-                                <a href="./index.html"><img src="" alt="">LOGO</a>
-                            </div>
-                            <div class="footer__payment">
-                                <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
-                                <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
-                                <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
-                                <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
-                                <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="footer__copyright__text">
-                            <p>Copyright &copy; Juillet <script>document.write(new Date().getFullYear());</script> || ETU2160 & ETU2217</i></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- Footer Section End -->
-
-        <!-- Search Begin -->
-        <div class="search-model">
-            <div class="h-100 d-flex align-items-center justify-content-center">
-                <div class="search-close-switch">+</div>
-                <form class="search-model-form">
-                    <input type="text" id="search-input" placeholder="Search here.....">
-                </form>
-            </div>
+            </form>
         </div>
-        <!-- Search End -->
+    </section>
+    <!-- Checkout Section End -->
 
-        <!-- Js Plugins -->
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.magnific-popup.min.js"></script>
-        <script src="js/jquery-ui.min.js"></script>
-        <script src="js/mixitup.min.js"></script>
-        <script src="js/jquery.countdown.min.js"></script>
-        <script src="js/jquery.slicknav.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/jquery.nicescroll.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
-
-    </html>
+    <?php ?>
