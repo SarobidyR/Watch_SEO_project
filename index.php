@@ -1,10 +1,26 @@
 <?php
 
-    require("connexion_mysql.php");
+require("connexion_mysql.php");
 
-    $sql_produit = "SELECT * FROM produit";
-    $query_produit = mysqli_query($db, $sql_produit);
-    
+session_start();
+if (!isset($_SESSION['identifiant'])) {
+    header('Location:index.php');
+}
+if (!isset($_SESSION['mdp'])) {
+    header('Location:index.php');
+}
+$identifiant = $_SESSION['identifiant'];
+$mdp = $_SESSION['mdp'];
+$id = $_SESSION['id'];
+
+$format1 = "SELECT * FROM users WHERE identifiant='%s'";
+$sql1 = sprintf($format1, $identifiant);
+$resultat1 = mysqli_query($bdd, $sql1);
+$donnees1 = mysqli_fetch_assoc($resultat1);
+
+$sql_produit = "SELECT * FROM produit";
+$query_produit = mysqli_query($bdd, $sql_produit);
+
 ?>
 
 <!DOCTYPE html>
@@ -25,8 +41,7 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -42,7 +57,10 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXXX-X"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
         gtag('js', new Date());
         gtag('config', 'UA-XXXXXXXXX-X');
     </script>
@@ -50,11 +68,20 @@
 
     <!-- Google Tag Manager -->
     <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-XXXXXXX');
+        (function(w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-XXXXXXX');
     </script>
     <!-- End Google Tag Manager -->
 
@@ -63,11 +90,6 @@
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-
     <!-- Offcanvas Menu Begin -->
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">
@@ -75,11 +97,11 @@
         <ul class="offcanvas__widget">
             <li><span class="icon_search search-switch"></span></li>
             <li><a href="#"><span class="icon_heart_alt"></span>
-                <div class="tip">2</div>
-            </a></li>
+                    <div class="tip">2</div>
+                </a></li>
             <li><a href="#"><span class="icon_bag_alt"></span>
-                <div class="tip">2</div>
-            </a></li>
+                    <div class="tip">2</div>
+                </a></li>
         </ul>
         <div class="offcanvas__logo">
             <a href="./index.html"><img src="img/logo.png" alt=""></a>
@@ -93,180 +115,81 @@
     <!-- Offcanvas Menu End -->
 
     <!-- Header Section Begin -->
-    <header class="header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-3 col-lg-2">
-                    <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-7">
-                    <nav class="header__menu">
-                        <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="#">Women’s</a></li>
-                            <li><a href="#">Men’s</a></li>
-                            <li><a href="./shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./product-details.html">Product Details</a></li>
-                                    <li><a href="./shop-cart.html">Shop Cart</a></li>
-                                    <li><a href="./checkout.html">Checkout</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__right">
-                        <div class="header__right__auth">
-                            <a href="#">Login</a>
-                            <a href="#">Register</a>
-                        </div>
-                        <ul class="header__right__widget">
-                            <li><span class="icon_search search-switch"></span></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span>
-                                <div class="tip">2</div>
-                            </a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span>
-                                <div class="tip">2</div>
-                            </a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="canvas__open">
-                <i class="fa fa-bars"></i>
-            </div>
-        </div>
-    </header>
+    <?php include("header.php") ?>
     <!-- Header Section End -->
 
     <!-- Categories Section Begin -->
-    
-<!-- Categories Section End -->
 
-<!-- Product Section Begin -->
-<section class="product spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-4">
-                <div class="section-title">
-                    <h4>New product</h4>
-                </div>
-            </div>
-            <div class="col-lg-8 col-md-8">
-                <ul class="filter__controls">
-                    <li class="active" data-filter="*">All</li>
-                    <li data-filter=".women">Women’s</li>
-                    <li data-filter=".men">Men’s</li>
-                    <li data-filter=".men">Unisex</li>
-                </ul>
-            </div>
-        </div>
-        <div class="row property__gallery">
-            <?php while($produit = mysqli_fetch_assoc($query_produit)) { ?>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="<?php echo $produit['images'];?>">
-                            <ul class="product__hover">
-                                <li><a href="img/product/Watch1.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><?php echo $produit['produit'];?></h6>
-                            <!-- <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div> -->
-                            <div class="product__price">$ <?php echo $produit['prix'];?></div>
-                            <div style="height: 20px;"></div>
-                            <form action="product-details.php" method="post">
-                                <input type="hidden" name="id_produit" value="<?php echo $produit['id_produit'];?>">
-                                <button type="submit" class="site-btn"><span class="icon_bag_alt"></span> Add to cart</button>   
-                            </form>             
-                        </div>
+    <!-- Categories Section End -->
+
+    <!-- Product Section Begin -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <div class="section-title">
+                        <h2>Bonjour <?php echo $donnees1['nom']; ?> !</h2>
+                        <h4>New product</h4>
                     </div>
                 </div>
-            <?php } ?>
-            
-        </div>
-    </div>
-</section>
-<!-- Product Section End -->
+                <div class="col-lg-8 col-md-8">
+                    <ul class="filter__controls">
+                        <li class="active" data-filter="*">All</li>
+                        <li data-filter=".women">Women’s</li>
+                        <li data-filter=".men">Men’s</li>
+                        <li data-filter=".men">Unisex</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row property__gallery">
+                <?php while ($produit = mysqli_fetch_assoc($query_produit)) { ?>
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
+                        <div class="product__item">
+                            <div class="product__item__pic set-bg" data-setbg="<?php echo $produit['images']; ?>">
+                                <ul class="product__hover">
+                                    <li><a href="<?php echo $produit['images']; ?>" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                    <!-- <li><a href="#"><span class="icon_heart_alt"></span></a></li> -->
 
-<!-- Banner Section Begin -->
+                                    <!-- ito DETAILS -->
+                                    <form action="product-details.php" method="post">
 
-<!-- Trend Section End -->
-
-<!-- Discount Section Begin -->
-
-<!-- Services Section End -->
-
-<!-- Instagram Begin -->
-        <!-- Instagram End -->
-
-        <!-- Footer Section Begin -->
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-7">
-                        <div class="footer__about">
-                            <div class="footer__logo">
-                                <a href="./index.html"><img src="" alt="">LOGO</a>
+                                        <li><a href="#"><span class="icon_bag_alt" type="submit" name="id_produit" value="<?php echo $produit['id_produit']; ?>"></span></a></li>
+                                        <!-- <li><a href="#"><span class="icon_bag_alt"></span></a></li> -->
+                                        <!-- <button type="submit" class="btn-xs"><span class="icon_bag_alt"></span>Détails</button> -->
+                                    </form>
+                                </ul>
                             </div>
-                            <div class="footer__payment">
-                                <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
-                                <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
-                                <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
-                                <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
-                                <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
+                            <div class="product__item__text">
+                                <h6><?php echo $produit['produit']; ?></h6>
+                                <div class="product__price">$ <?php echo $produit['prix']; ?></div>
+                                <div style="height: 20px;"></div>
+
+                                <!-- ito eee, ça c'est ADD CART -->
+                                <form action="product-details.php" method="post">
+                                    <input type="hidden" name="id_produit" value="<?php echo $produit['id_produit']; ?>">
+                                    <button type="submit" class="site-btn"><span class="icon_bag_alt"></span> Add to cart</button>
+                                </form>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="footer__copyright__text">
-                            <p>Copyright &copy; Juillet <script>document.write(new Date().getFullYear());</script> || ETU2160 & ETU2217</i></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- Footer Section End -->
+                <?php } ?>
 
-        <!-- Search Begin -->
-        <div class="search-model">
-            <div class="h-100 d-flex align-items-center justify-content-center">
-                <div class="search-close-switch">+</div>
-                <form class="search-model-form">
-                    <input type="text" id="search-input" placeholder="Search here.....">
-                </form>
             </div>
         </div>
-        <!-- Search End -->
+    </section>
+    <!-- Product Section End -->
 
-        <!-- Js Plugins -->
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.magnific-popup.min.js"></script>
-        <script src="js/jquery-ui.min.js"></script>
-        <script src="js/mixitup.min.js"></script>
-        <script src="js/jquery.countdown.min.js"></script>
-        <script src="js/jquery.slicknav.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/jquery.nicescroll.min.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+    <!-- Banner Section Begin -->
 
-    </html>
+    <!-- Trend Section End -->
+
+    <!-- Discount Section Begin -->
+
+    <!-- Services Section End -->
+
+    <!-- Instagram Begin -->
+
+    <!-- Instagram End -->
+
+    <!-- Footer Section Begin -->
+    <?php include("footer.php") ?>
