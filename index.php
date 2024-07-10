@@ -13,6 +13,7 @@ $identifiant = $_SESSION['identifiant'];
 $mdp = $_SESSION['mdp'];
 $id = $_SESSION['id'];
 
+
 $format1 = "SELECT * FROM users WHERE identifiant='%s'";
 $sql1 = sprintf($format1, $identifiant);
 $resultat1 = mysqli_query($bdd, $sql1);
@@ -90,28 +91,7 @@ $query_produit = mysqli_query($bdd, $sql_produit);
 </head>
 
 <body>
-    <!-- Offcanvas Menu Begin -->
-    <div class="offcanvas-menu-overlay"></div>
-    <div class="offcanvas-menu-wrapper">
-        <div class="offcanvas__close">+</div>
-        <ul class="offcanvas__widget">
-            <li><span class="icon_search search-switch"></span></li>
-            <li><a href="#"><span class="icon_heart_alt"></span>
-                    <div class="tip">2</div>
-                </a></li>
-            <li><a href="#"><span class="icon_bag_alt"></span>
-                    <div class="tip">2</div>
-                </a></li>
-        </ul>
-        <div class="offcanvas__logo">
-            <a href="./index.html"><img src="img/logo.png" alt=""></a>
-        </div>
-        <div id="mobile-menu-wrap"></div>
-        <div class="offcanvas__auth">
-            <a href="#">Login</a>
-            <a href="#">Register</a>
-        </div>
-    </div>
+
     <!-- Offcanvas Menu End -->
 
     <!-- Header Section Begin -->
@@ -129,7 +109,8 @@ $query_produit = mysqli_query($bdd, $sql_produit);
                 <div class="col-lg-4 col-md-4">
                     <div class="section-title">
                         <h2>Bonjour <?php echo $donnees1['nom']; ?> !</h2>
-                        <h4>New product</h4>
+                        <br>
+                        <h4>Nos Produits</h4>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8">
@@ -143,35 +124,32 @@ $query_produit = mysqli_query($bdd, $sql_produit);
             </div>
             <div class="row property__gallery">
                 <?php while ($produit = mysqli_fetch_assoc($query_produit)) { ?>
-                    <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix mb-5">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="<?php echo $produit['images']; ?>">
                                 <ul class="product__hover">
-                                    <li><a href="<?php echo $produit['images']; ?>" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                    <!-- <li><a href="#"><span class="icon_heart_alt"></span></a></li> -->
+                                    <li><a href="img/product/Watch1.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                    <li><a href="#"><span class="icon_heart_alt"></span></a></li>
 
-                                    <!-- ito DETAILS -->
-                                    <form action="product-details.php" method="post">
-
-                                        <li><a href="#"><span class="icon_bag_alt" type="submit" name="id_produit" value="<?php echo $produit['id_produit']; ?>"></span></a></li>
-                                        <!-- <li><a href="#"><span class="icon_bag_alt"></span></a></li> -->
-                                        <!-- <button type="submit" class="btn-xs"><span class="icon_bag_alt"></span>Détails</button> -->
-                                    </form>
                                 </ul>
                             </div>
                             <div class="product__item__text">
                                 <h6><?php echo $produit['produit']; ?></h6>
                                 <div class="product__price">$ <?php echo $produit['prix']; ?></div>
                                 <div style="height: 20px;"></div>
-
-                                <!-- ito eee, ça c'est ADD CART -->
-                                <form action="product-details.php" method="post">
+                                <form action="#" method="post">
                                     <input type="hidden" name="id_produit" value="<?php echo $produit['id_produit']; ?>">
                                     <button type="submit" class="site-btn"><span class="icon_bag_alt"></span> Add to cart</button>
+                                </form>
+                                <br>
+                                <form action="product-details.php" method="post">
+                                    <input type="hidden" name="id_produit" value="<?php echo $produit['id_produit']; ?>">
+                                    <button type="submit" class="site-btn"><span class="arrow_expand"></span> Voir Détails</button>
                                 </form>
                             </div>
                         </div>
                     </div>
+                    <br>
                 <?php } ?>
 
             </div>
@@ -188,7 +166,6 @@ $query_produit = mysqli_query($bdd, $sql_produit);
     <!-- Services Section End -->
 
     <!-- Instagram Begin -->
-
     <!-- Instagram End -->
 
     <!-- Footer Section Begin -->

@@ -84,7 +84,7 @@ require("connexion_mysql.php");
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
                                     <p>Mot de passe<span>*</span></p>
-                                    <input type="text" name="mdp" id="mdp">
+                                    <input type="password" name="mdp" id="mdp">
                                 </div>
                             </div>
                             <div class="col-lg-12">

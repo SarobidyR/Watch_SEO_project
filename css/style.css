@@ -180,6 +180,18 @@ ol {
 	border-radius: 50px;
 }
 
+.mini-site-btn {
+	font-size: 14px;
+	color: #ffffff;
+	background: #ff1818;
+	font-weight: 600;
+	border: none;
+	text-transform: uppercase;
+	display: inline-block;
+	padding: 12px 30px;
+	border-radius: 50px;
+}
+
 /* Preloder */
 
 #preloder {
@@ -2439,7 +2451,7 @@ ol {
 	margin-bottom: 18px;
 }
 
-.checkout__order .site-btn {
+.checkout__order .site-btn .mini-site-btn {
 	width: 100%;
 }
 
