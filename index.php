@@ -19,7 +19,7 @@ $resultat1 = mysqli_query($bdd, $sql1);
 $donnees1 = mysqli_fetch_assoc($resultat1);
 
 $sql_produit = "SELECT * FROM produit";
-$query_produit = mysqli_query($db, $sql_produit);
+$query_produit = mysqli_query($bdd, $sql_produit);
 
 ?>
 
@@ -178,7 +178,7 @@ $query_produit = mysqli_query($db, $sql_produit);
             <div class="row">
                 <div class="col-lg-4 col-md-4">
                     <div class="section-title">
-                        <h2>Bonjour <?php echo $donnees1['Nom']; ?> !</h2>
+                        <h2>Bonjour <?php echo $donnees1['nom']; ?> !</h2>
                         <h4>New product</h4>
                     </div>
                 </div>

@@ -1,12 +1,12 @@
 <?php
-require("connexion.php");
+require("connexion_mysql.php");
 
 session_start();
 $_SESSION['identifiant'] = $_GET['identifiant'];
 $_SESSION['mdp'] = $_GET['mdp'];
 
-$format1 = "SELECT * FROM users WHERE identifiant='%s'";
-$sql1 = sprintf($format1, $_SESSION['identifiant']);
+$format1 = "SELECT * FROM users WHERE identifiant='%s' AND mdp='%s'";
+$sql1 = sprintf($format1, $_SESSION['identifiant'], $_SESSION['mdp']);
 $resultat1 = mysqli_query($bdd, $sql1);
 $donnees1 = mysqli_fetch_assoc($resultat1);
 $_SESSION['id'] = $donnees1['id_users'];
@@ -77,8 +77,8 @@ $_SESSION['id'] = $donnees1['id_users'];
 
 <body>
     <?php
-    if ($_SESSION['mdp'] == $donnees1['Mdp'])
-        header('Location:accueil.php');
+    if ($_SESSION['mdp'] == $donnees1['mdp'])
+        header('Location:index.php');
     else {
         echo 'Votre identifiant/mot de passe est incorrect';
     }
