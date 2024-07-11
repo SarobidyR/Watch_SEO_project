@@ -15,8 +15,8 @@ create table categories(
     active varchar(10) default null
 );
 
-create table order(
-    id_order int(10) not null primary key auto_increment ,
+create table orders(
+    id_orders int(10) not null primary key auto_increment ,
     id_produit int,
     id_users int,
     prix decimal,
@@ -37,3 +37,9 @@ create table produit(
     active varchar(10) default null,
     FOREIGN KEY(id_categories) REFERENCES categories(id_categories)
 );
+
+CREATE OR REPLACE VIEW v_orders_produits AS
+SELECT id_orders, orders.id_produit, id_users, produit, orders.prix, qte,
+montant_total_produits, statut, date_achat, id_categories, images
+FROM orders
+JOIN produit ON orders.id_produit = produit.id_produit;

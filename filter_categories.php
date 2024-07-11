@@ -18,8 +18,13 @@
     $resultat1 = mysqli_query($bdd, $sql1);
     $donnees1 = mysqli_fetch_assoc($resultat1);
 
-    $sql_produit = "SELECT * FROM produit";
-    $query_produit = mysqli_query($bdd, $sql_produit);
+    if(isset($_POST['filter_categories']))
+    {
+        $filter_categories = $_POST['filter_categories'];
+        $sql_produit = "SELECT * FROM produit where id_categories = $filter_categories";
+        $query_produit = mysqli_query($bdd, $sql_produit);
+    }
+    
 
     $sql_categories = "SELECT * FROM categories";
     $query_categories = mysqli_query($bdd, $sql_categories);
@@ -137,19 +142,19 @@
                 </div>
                 <div class="col-lg-8 col-md-8">
                     <nav class="header__menu">
-                        <ul class="filter__controls">
-                            <li><a href="index.php">All</a></li>
-                            <?php while ($categories = mysqli_fetch_assoc($query_categories)) { ?>
-                                    <li>                                
-                                        <form action="filter_categories.php" method="post">
-                                            <button style="border: none; background: none"><p><?php echo $categories['categories']; ?></p></button>                                
-                                            <input type="hidden" name="filter_categories" value="<?php echo $categories['id_categories']; ?>">
+                            <ul class="filter__controls">
+                                <li><a href="./index.php">All</a></li>
+                                <?php while ($categories = mysqli_fetch_assoc($query_categories)) { ?>
+                                        <li>                                
+                                            <form action="filter_categories.php" method="post">
+                                                <button style="border: none; background: none"><p><?php echo $categories['categories']; ?></p></button>                                
+                                                <input type="hidden" name="filter_categories" value="<?php echo $categories['id_categories']; ?>">
 
-                                        </form>
-                                    </li>
-                            <?php } ?>
-                        </ul>
-                    </nav>
+                                            </form>
+                                        </li>
+                                <?php } ?>
+                            </ul>
+                        </nav>    
                 </div>
             </div>
             <div class="row property__gallery">
@@ -164,7 +169,7 @@
                                     <!-- ito DETAILS -->
                                     <form action="product-details.php" method="post">
 
-                                        <!-- <li><a href="product-details.php"><span class="icon_bag_alt" type="submit" name="id_produit" value="<?php echo $produit['id_produit']; ?>"></span></a></li> -->
+                                        <li><a href="#"><span class="icon_bag_alt" type="submit" name="id_produit" value="<?php echo $produit['id_produit']; ?>"></span></a></li>
                                         <!-- <li><a href="#"><span class="icon_bag_alt"></span></a></li> -->
                                         <!-- <button type="submit" class="btn-xs"><span class="icon_bag_alt"></span>Détails</button> -->
                                     </form>
@@ -173,23 +178,13 @@
                             <div class="product__item__text">
                                 <h6><?php echo $produit['produit']; ?></h6>
                                 <div class="product__price">$ <?php echo $produit['prix']; ?></div>
-                                <div style="height: 10px;"></div>
+                                <div style="height: 20px;"></div>
 
+                                <!-- ito eee, ça c'est ADD CART -->
                                 <form action="product-details.php" method="post">
                                     <input type="hidden" name="id_produit" value="<?php echo $produit['id_produit']; ?>">
-                                    <button type="submit" class="site-btn" style="background: #f2f2f2; color: #111111;">Voir details</button>
-                                </form>
-
-                                <div style="height: 5px;"></div>
-
-                                <form action="order_traitement.php" method="post">
-                                    <input type="hidden" name="un_produit" value="<?php echo $produit['id_produit']; ?>">
-                                    <input type="hidden" name="un_prix" value="<?php echo $produit['prix']; ?>">
-
                                     <button type="submit" class="site-btn"><span class="icon_bag_alt"></span> Add to cart</button>
-
                                 </form>
-
                             </div>
                         </div>
                     </div>

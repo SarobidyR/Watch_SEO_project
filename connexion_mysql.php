@@ -1,5 +1,5 @@
 <?php
-    if($db = mysqli_connect('localhost', 'root', 'root', 'watch_data'))
+    if($bdd = mysqli_connect('localhost', 'root', 'root', 'watch_data'))
     {
         // echo 'Connexion established';
     }
@@ -7,6 +7,6 @@
     {
         echo 'Connexion issue';
     }
-    mysqli_set_charset($db, "utf8");
+    mysqli_set_charset($bdd, "utf8");
 
 ?>

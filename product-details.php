@@ -2,18 +2,24 @@
 
     require("connexion_mysql.php");
 
+    session_start();
+    if (isset($_SESSION['id'])) {
+        $session_id = $_SESSION['id'];
+        // echo "ID from session: " . $session_id;
+    }
+
     if (isset($_POST['id_produit'])) {
         $id_produit = $_POST['id_produit'];
         // echo "ID du produit : " . $id_produit;
         $sql_details = "SELECT * FROM produit WHERE id_produit ='%s'";
         $sql2_details = sprintf($sql_details, $id_produit);
-        $details_result = mysqli_query($db, $sql2_details);
+        $details_result = mysqli_query($bdd, $sql2_details);
         $details = mysqli_fetch_assoc($details_result);
 
         $id_categorie = $details['id_categories'];
         $sql_categorie = "SELECT * FROM categories WHERE id_categories ='%s'";
         $sql2_categorie = sprintf($sql_categorie, $id_categorie);
-        $categorie_result = mysqli_query($db, $sql2_categorie);
+        $categorie_result = mysqli_query($bdd, $sql2_categorie);
         $categorie = mysqli_fetch_assoc($categorie_result);
         $categorie_name = $categorie['categories'];
     } else {
@@ -193,13 +199,18 @@
                         <div class="product__details__price">$ <?php echo $details['prix'];?> </div>
                         <p><?php echo $details['descriptions'];?></p>
                         <div class="product__details__button">
-                            <div class="quantity">
-                                <span>Quantité:</span>
-                                <div class="pro-qty">
-                                    <input type="text" value="1">
+                            <form action="order_traitement.php" method="post">
+                                <div class="quantity">
+                                    <span>Quantité:</span>
+                                    <div class="pro-qty">
+                                        <input type="number" name="quantite">
+                                    </div>
                                 </div>
-                            </div>
-                            <a href="#" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
+                                <input type="hidden" name="id_produit" value="<?php echo $details['id_produit'];?>">
+                                <input type="hidden" name="prix" value="<?php echo $details['prix'];?>">
+
+                                <button type="submit" class="site-btn"><span class="icon_bag_alt"></span> Add to cart</button>
+                            </form>
 
                         </div>
                        
