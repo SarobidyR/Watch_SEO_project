@@ -98,7 +98,7 @@ if (isset($_POST['id_produit'])) {
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.php"><i class="fa fa-home"></i> Home</a>
+                        <a href="./accueil.php"><i class="fa fa-home"></i> Home</a>
                     </div>
                 </div>
             </div>
@@ -127,14 +127,22 @@ if (isset($_POST['id_produit'])) {
                         <div class="product__details__price">$ <?php echo $details['prix']; ?> </div>
                         <p><?php echo $details['descriptions']; ?></p>
                         <div class="product__details__button">
-                            <div class="quantity">
-                                <span>Quantité:</span>
-                                <div class="pro-qty">
-                                    <input type="text" value="1">
-                                </div>
-                            </div>
-                            <a href="#" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
 
+                            <div class="product__details__button">
+                                <form action="order_traitement.php" method="post">
+                                    <div class="quantity">
+                                        <span>Quantité:</span>
+                                        <div class="pro-qty">
+                                            <input type="number" name="quantite">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="id_produit" value="<?php echo $details['id_produit']; ?>">
+                                    <input type="hidden" name="prix" value="<?php echo $details['prix']; ?>">
+
+                                    <button type="submit" class="site-btn"><span class="icon_bag_alt"></span> Ajouter au panier</button>
+                                </form>
+
+                            </div>
                         </div>
 
                     </div>

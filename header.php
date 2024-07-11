@@ -21,7 +21,7 @@
     </div>
     <div id="mobile-menu-wrap"></div>
     <div class="offcanvas__auth">
-        <a href="login.php">Login</a>
+        <a href="index.php">Login</a>
         <a href="#">Register</a>
         <a href="logout.php">Log out</a>
 
@@ -39,7 +39,7 @@
             <div class="col-xl-6 col-lg-7">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="index.php">Accueil</a></li>
+                        <li class="active"><a href="accueil.php">Accueil</a></li>
                         <li class="active"><a href="formulaire-recherche.php">Rechercher une montre</a></li>
                         <li><span class="icon_search search-switch"></span></li>
 
@@ -62,7 +62,7 @@
             <div class="col-lg-3">
                 <div class="header__right">
                     <div class="header__right__auth">
-                        <a href="login.php">Login</a>
+                        <a href="index.php">Login</a>
                         <a href="#">Register</a>
                         <a href="logout.php">Log out</a>
 

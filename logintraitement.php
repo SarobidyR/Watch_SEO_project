@@ -78,7 +78,7 @@ $_SESSION['id'] = $donnees1['id_users'];
 <body>
     <?php
     if ($_SESSION['mdp'] == $donnees1['mdp'])
-        header('Location:index.php');
+        header('Location:accueil.php');
     else {
         echo 'Votre identifiant/mot de passe est incorrect';
     }
